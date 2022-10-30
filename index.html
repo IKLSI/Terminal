@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, minimum-scale=1,initial-scale=1"/>
+        <meta charset="UTF-8">
+        <title>Terminal</title>
+        <link href="https://cdn-icons-png.flaticon.com/512/7544/7544562.png" rel="icon" type="image/x-icon">
+        <meta name="author" content="Kyliann 'KLS'">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css" />
@@ -30,19 +32,88 @@
     <body>
         <h1>Terminal</h1>
         <script>
+        var win;
         $('body').terminal({
-            name: function (name) {
+            name: function(name) {
                 this.echo('Salut, ' + name);
             },
-            echo: function (echo) {
+          
+            echo: function(echo) {
                 this.echo(echo);
             },
-            help: function () {
+          
+            help: function() {
                 this.echo('\t name - prend un paramètre un nom');
                 this.echo('\t echo - prend en paramètre une phrase');
+                this.echo('\t calculatrice - prend en paramètre un premier nombre suivi par un opérateur puis un second nombre de la forme num1 operateur num2');
+                this.echo('\t open - prend en paramètre RC ou Google');
+                this.echo('\t exit - ferme le site que vous avez ouvert avec la commande open');
+                this.echo('\t GenereMDP - prend en paramètre un chiffre qui sera le nombre de caractère');
+                this.echo('\t GenereNombre - prend en paramètre un chiffre qui sera la borne supérieur de cette intervalle pour un nombre hasard');
+                this.echo('\t jeu - prend en paramètre une chaîne soit Pierre soit Feuille soit Ciseaux et simule un adversaire');
+                this.echo('\t clear - nettoie la fenêtre');
             },
-        }, 
-        {
+          
+            calculatrice: function(num1, operateur, num2) {
+                if (operateur === '*') {
+                    let result = num1 * num2;
+                    this.echo(result);
+                } else if (operateur === '+') {
+                    let result = num1 + num2;
+                    this.echo(result);
+                } else if (operateur === '-') {
+                    let result = num1 - num2;
+                    this.echo(result);
+                } else if (operateur === '/') {
+                    let result = num1 / num2;
+                    this.echo(result);
+                } else if (operateur === 'exp') {
+                    let result = Math.pow(num1, num2);
+                    this.echo(result);
+                } else if (operateur === 'racine') {
+                    let result =  Math. sqrt(num1, num2);
+                    this.echo(result);
+                }
+            },
+          
+            open: function(site) {
+                if (site === 'RC') {
+                    win = window.open("https://iklsi.github.io/RC/");
+                } else if (site === 'Google') {
+                    win = window.open("https://www.google.fr/");
+                }
+            },
+          
+            exit: function() {
+                win.close();
+            },
+          
+            GenereMDP: function(argument) {
+                var pass = '';
+                var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 'abcdefghijklmnopqrstuvwxyz0123456789@#$!?';
+
+                for (let i = 1; i <= argument; i++) {
+                    var char = Math.floor(Math.random() * str.length + 1);
+                    pass += str.charAt(char)
+                }
+
+                return pass;
+                this.echo(GenereMDP);
+            },
+
+            GenereNombre: function(argument) {
+                for (let i = 1; i <= argument; i++) {
+                    var char = Math.floor(Math.random() * argument + 1);
+                }
+
+                this.echo(char);
+            },
+
+            jeu: function(argument) {
+                var Tableau = ["Pierre", "Feuille", "Ciseaux"];
+                this.echo(Tableau[Math.floor(Math.random() * 3)]);
+            },
+        }, {
             greetings: 'Terminal - KLS'
         });
     </script>
