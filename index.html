@@ -34,16 +34,13 @@
         <script>
         var win;
         $('body').terminal({
-            name: function(name) {
-                this.echo('Salut, ' + name);
-            },
           
             echo: function(echo) {
                 this.echo(echo);
             },
           
             help: function() {
-                this.echo('\t name - prend un paramètre un nom');
+                this.echo('\t welcome - prend un paramètre un nom');
                 this.echo('\t echo - prend en paramètre une phrase');
                 this.echo('\t calculatrice - prend en paramètre un premier nombre suivi par un opérateur puis un second nombre de la forme num1 operateur num2');
                 this.echo('\t open - prend en paramètre RC ou Google');
@@ -113,6 +110,18 @@
                 var Tableau = ["Pierre", "Feuille", "Ciseaux"];
                 this.echo(Tableau[Math.floor(Math.random() * 3)]);
             },
+
+            message: function(argument, color) {
+                let newP = " ";
+                newP = argument;
+                write(newP.fontcolor(color)); 
+            },
+
+            welcome: function() {
+              let name = prompt('Quel est votre nom ?');
+              alert('Bienvenue sur ce terminal, ' + name);
+            },
+
         }, {
             greetings: 'Terminal - KLS'
         });
